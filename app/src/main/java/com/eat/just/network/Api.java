@@ -1,5 +1,7 @@
 package com.eat.just.network;
 
+import android.location.Location;
+
 /**
  */
 
@@ -13,6 +15,7 @@ public final class Api {
     public static final String HEADER_AUTHORIZATION_VALUE = "Basic VGVjaFRlc3Q6bkQ2NGxXVnZreDVw";
     public static final String HEADER_ACCEPT_LANGUAGE_KEY = "Accept-Language";
     public static final String HEADER_ACCEPT_LANGUAGE_VALUE = "en-GB";
+
 
     //query
     public static final String QUERY = "q";

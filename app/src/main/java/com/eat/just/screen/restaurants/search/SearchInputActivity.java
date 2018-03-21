@@ -1,19 +1,20 @@
 package com.eat.just.screen.restaurants.search;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.view.Menu;
 
 import com.eat.just.Extras;
 import com.eat.just.R;
+import com.eat.just.base.PermissionActivity;
 
 import timber.log.Timber;
 
-public class SearchInputActivity extends AppCompatActivity {
+public class SearchInputActivity extends PermissionActivity {
 
     private SearchView searchView;
 
@@ -59,4 +60,20 @@ public class SearchInputActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected String[] getPermissions() {
+        return new String[]{Manifest.permission.ACCESS_COARSE_LOCATION};
+    }
+
+    @Override
+    protected void onPermissionGranted() {
+        Timber.d("Permission Granted");
+    }
+
+    @Override
+    protected void onPermissionDenied(String[] permission) {
+        Timber.d("Permission denied for");
+        for(String perm:permission)
+            Timber.d("PERM = %s",perm);
+    }
 }
