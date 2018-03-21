@@ -5,4 +5,7 @@
     <color name="colorAccent">#8BC34A</color>
     <color name="textColorPrimary">#212121</color>
     <color name="textColorSecondary">#757575</color>
+
+    <color name="black_70">#77010101</color>
+
 </resources>
