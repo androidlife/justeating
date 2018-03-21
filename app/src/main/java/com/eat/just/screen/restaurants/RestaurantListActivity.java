@@ -17,6 +17,11 @@ public class RestaurantListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_restaurantlist);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_logo);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        goToSearchActivity();
+    }
+
+    private void goToSearchActivity() {
+        startActivity(new Intent(this, SearchInputActivity.class));
     }
 
     @Override
@@ -28,7 +33,7 @@ public class RestaurantListActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_search) {
-            startActivity(new Intent(this, SearchInputActivity.class));
+            goToSearchActivity();
         }
         return super.onOptionsItemSelected(item);
     }
