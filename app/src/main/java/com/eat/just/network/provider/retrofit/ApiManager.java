@@ -1,7 +1,7 @@
 package com.eat.just.network.provider.retrofit;
 
 import com.eat.just.BuildConfig;
-import com.eat.just.network.Urls;
+import com.eat.just.network.Api;
 
 import java.util.concurrent.TimeUnit;
 
@@ -37,7 +37,7 @@ public class ApiManager {
                         okhttpClientBuilder.addInterceptor(interceptorProvider.getLoggingInterceptor(HttpLoggingInterceptor.Level.BODY));
                     okhttpClientBuilder.addInterceptor(interceptorProvider.getAuthorizationInterceptor());
                     retrofit = new Retrofit.Builder()
-                            .baseUrl(Urls.BASE)
+                            .baseUrl(Api.URL_BASE)
                             .client(okhttpClientBuilder.build())
                             .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

@@ -1,12 +1,17 @@
 package com.eat.just.screen.restaurants.search;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
 import android.view.Menu;
 
+import com.eat.just.Extras;
 import com.eat.just.R;
+
+import timber.log.Timber;
 
 public class SearchInputActivity extends AppCompatActivity {
 
@@ -16,7 +21,6 @@ public class SearchInputActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_input);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -26,6 +30,33 @@ public class SearchInputActivity extends AppCompatActivity {
         searchView.setMaxWidth(Integer.MAX_VALUE);
         searchView.setIconifiedByDefault(false);
         searchView.setIconified(false);
+        searchView.setQueryHint(getString(R.string.info_search_post_code));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                sendSearchQuery(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
         return super.onCreateOptionsMenu(menu);
     }
+
+    private void sendSearchQuery(String query) {
+        Timber.d("Query to be searched = %s", query);
+        if (TextUtils.isEmpty(query)) {
+            return;
+        }
+        Intent intent = new Intent();
+        intent.putExtra(Extras.SEARCH_QUERY, query);
+        setResult(Activity.RESULT_OK, intent);
+        finish();
+    }
+
+
 }

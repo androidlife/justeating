@@ -1,6 +1,6 @@
 package com.eat.just.network.provider.retrofit;
 
-import com.eat.just.network.Config;
+import com.eat.just.network.Api;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -21,8 +21,8 @@ public class InterceptorProvider {
         return chain -> {
             Request original = chain.request();
             Request.Builder requestBuilder = original.newBuilder()
-                    .addHeader("Authorization", Config.HEADER_AUTHORIZATION)
-                    .addHeader("Accept-Language", Config.HEADER_ACCEPT_LANGUAGE_GB);
+                    .addHeader(Api.HEADER_ACCEPT_LANGUAGE_KEY, Api.HEADER_ACCEPT_LANGUAGE_VALUE)
+                    .addHeader(Api.HEADER_AUTHORIZATION_KEY, Api.HEADER_AUTHORIZATION_VALUE);
             Request request = requestBuilder.build();
             return chain.proceed(request);
         };
