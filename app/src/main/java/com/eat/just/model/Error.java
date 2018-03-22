@@ -17,6 +17,7 @@ public class Error extends java.lang.Error {
         AccessDenied,
         Fetch,
         LocationPermNotGranted,
-        LocationNotAvailable
+        LocationNotAvailable,
+        PostalCode
     }
 }

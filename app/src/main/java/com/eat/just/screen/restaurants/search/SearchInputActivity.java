@@ -3,7 +3,6 @@ package com.eat.just.screen.restaurants.search;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
@@ -12,8 +11,8 @@ import android.view.Menu;
 import com.eat.just.Extras;
 import com.eat.just.R;
 import com.eat.just.base.PermissionActivity;
-import com.eat.just.location.LastLocationProvider;
 import com.eat.just.location.LocationContract;
+import com.eat.just.location.PostalCodeRetriever;
 import com.eat.just.model.Error;
 
 import timber.log.Timber;
@@ -26,23 +25,6 @@ public class SearchInputActivity extends PermissionActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_input);
-
-        if (isPermissionGranted()) {
-            LocationContract.LocationProvider locationProvider = new LastLocationProvider(this);
-            locationProvider.fetchLocation(new LocationContract.OnLocationFetchListener() {
-                @Override
-                public void onLocationFetched(Location location) {
-
-                }
-
-                @Override
-                public void onLocationFetchError(Error error) {
-
-                }
-            });
-        } else {
-            requestPermission();
-        }
     }
 
     @Override

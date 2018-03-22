@@ -19,4 +19,16 @@ public interface LocationContract {
 
         void onLocationFetchError(Error error);
     }
+
+    interface PostCodeProvider {
+        void cancel(boolean cancel);
+
+        void fetchPostCodeFrom(double latitude, double longitude, OnPostCodeFetchListener postCodeFetchListener);
+    }
+
+    interface OnPostCodeFetchListener {
+        void onPostCodeFetched(String postCode);
+
+        void onPostCodeFetchError(Error error);
+    }
 }
