@@ -15,6 +15,8 @@ public class Error extends java.lang.Error {
         Network,
         Empty,
         AccessDenied,
-        Fetch
+        Fetch,
+        LocationPermNotGranted,
+        LocationNotAvailable
     }
 }
