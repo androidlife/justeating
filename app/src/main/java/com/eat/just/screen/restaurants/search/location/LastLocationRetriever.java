@@ -1,4 +1,4 @@
-package com.eat.just.location;
+package com.eat.just.screen.restaurants.search.location;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

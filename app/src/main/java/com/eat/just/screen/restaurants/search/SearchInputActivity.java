@@ -16,8 +16,8 @@ import android.widget.Toast;
 import com.eat.just.Extras;
 import com.eat.just.R;
 import com.eat.just.base.PermissionActivity;
-import com.eat.just.location.LocationContract;
-import com.eat.just.location.PostalCodeProvider;
+import com.eat.just.screen.restaurants.search.location.LocationContract;
+import com.eat.just.screen.restaurants.search.location.PostalCodeProvider;
 import com.eat.just.model.Error;
 
 import butterknife.BindView;
@@ -32,20 +32,36 @@ public class SearchInputActivity extends PermissionActivity {
     ProgressBar progressBar;
     @BindView(R.id.tv_info)
     TextView tvInfo;
+    private LocationContract.PostCodeProvider postCodeProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_input);
         ButterKnife.bind(this);
-
         postCodeProvider = new PostalCodeProvider(this);
-
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_input, menu);
+        initSearchView(menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_location) {
+            if (isPermissionGranted())
+                fetchPostalCode();
+            else
+                requestPermission();
+        }
+        return true;
+    }
+
+    private void initSearchView(Menu menu) {
         searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         searchView.setMaxWidth(Integer.MAX_VALUE);
         searchView.setIconifiedByDefault(false);
@@ -63,8 +79,6 @@ public class SearchInputActivity extends PermissionActivity {
                 return false;
             }
         });
-
-        return super.onCreateOptionsMenu(menu);
     }
 
     private void sendSearchQuery(String query) {
@@ -79,8 +93,6 @@ public class SearchInputActivity extends PermissionActivity {
     }
 
 
-    private LocationContract.PostCodeProvider postCodeProvider;
-
     private void fetchPostalCode() {
         showProgress(true);
         postCodeProvider.fetchPostCode(new LocationContract.OnPostCodeFetchListener() {
@@ -93,8 +105,7 @@ public class SearchInputActivity extends PermissionActivity {
             @Override
             public void onPostCodeFetchError(Error error) {
                 showProgress(false);
-                Toast.makeText(SearchInputActivity.this, "Error Fetching PostCode",
-                        Toast.LENGTH_SHORT).show();
+                showInfo(getString(R.string.error_fetch_postcode));
             }
         });
     }
@@ -124,32 +135,21 @@ public class SearchInputActivity extends PermissionActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_location) {
-            if (isPermissionGranted())
-                fetchPostalCode();
-            else
-                requestPermission();
-        }
-
-
-        return true;
-    }
-
-    @Override
     protected String[] getPermissions() {
         return new String[]{Manifest.permission.ACCESS_COARSE_LOCATION};
     }
 
     @Override
     protected void onPermissionGranted() {
-        Timber.d("Permission Granted");
         fetchPostalCode();
     }
 
     @Override
     protected void onPermissionDenied(String[] permission) {
-        Toast.makeText(this, "Need location permission to fetch post code",
-                Toast.LENGTH_SHORT).show();
+        showInfo(getString(R.string.info_location_perm_needed));
+    }
+
+    private void showInfo(String info) {
+        Toast.makeText(this, info, Toast.LENGTH_SHORT).show();
     }
 }

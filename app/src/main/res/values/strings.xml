@@ -2,4 +2,6 @@
     <string name="app_name">JustEat</string>
     <string name="info_search">Search</string>
     <string name="info_search_post_code">Search by Post Code</string>
+    <string name="info_location_perm_needed">Need location permission to fetch post code</string>
+    <string name="error_fetch_postcode">Error Fetching PostCode</string>
 </resources>
