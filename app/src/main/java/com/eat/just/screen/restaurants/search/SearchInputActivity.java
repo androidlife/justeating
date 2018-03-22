@@ -7,24 +7,40 @@ import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.eat.just.Extras;
 import com.eat.just.R;
 import com.eat.just.base.PermissionActivity;
 import com.eat.just.location.LocationContract;
-import com.eat.just.location.PostalCodeRetriever;
+import com.eat.just.location.PostalCodeProvider;
 import com.eat.just.model.Error;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import timber.log.Timber;
 
 public class SearchInputActivity extends PermissionActivity {
 
     private SearchView searchView;
 
+    @BindView(R.id.pb)
+    ProgressBar progressBar;
+    @BindView(R.id.tv_info)
+    TextView tvInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_input);
+        ButterKnife.bind(this);
+
+        postCodeProvider = new PostalCodeProvider(this);
+
     }
 
     @Override
@@ -63,6 +79,63 @@ public class SearchInputActivity extends PermissionActivity {
     }
 
 
+    private LocationContract.PostCodeProvider postCodeProvider;
+
+    private void fetchPostalCode() {
+        showProgress(true);
+        postCodeProvider.fetchPostCode(new LocationContract.OnPostCodeFetchListener() {
+            @Override
+            public void onPostCodeFetched(String postCode) {
+                showProgress(false);
+                searchView.setQuery(postCode, false);
+            }
+
+            @Override
+            public void onPostCodeFetchError(Error error) {
+                showProgress(false);
+                Toast.makeText(SearchInputActivity.this, "Error Fetching PostCode",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        postCodeProvider.cancel(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        postCodeProvider.cancel(false);
+    }
+
+    private void showProgress(boolean show) {
+        if (show) {
+            searchView.setEnabled(false);
+            tvInfo.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            searchView.setEnabled(true);
+            tvInfo.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_location) {
+            if (isPermissionGranted())
+                fetchPostalCode();
+            else
+                requestPermission();
+        }
+
+
+        return true;
+    }
+
     @Override
     protected String[] getPermissions() {
         return new String[]{Manifest.permission.ACCESS_COARSE_LOCATION};
@@ -71,12 +144,12 @@ public class SearchInputActivity extends PermissionActivity {
     @Override
     protected void onPermissionGranted() {
         Timber.d("Permission Granted");
+        fetchPostalCode();
     }
 
     @Override
     protected void onPermissionDenied(String[] permission) {
-        Timber.d("Permission denied for");
-        for (String perm : permission)
-            Timber.d("PERM = %s", perm);
+        Toast.makeText(this, "Need location permission to fetch post code",
+                Toast.LENGTH_SHORT).show();
     }
 }

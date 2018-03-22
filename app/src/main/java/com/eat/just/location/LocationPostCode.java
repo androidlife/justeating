@@ -17,22 +17,22 @@ import timber.log.Timber;
 /**
  */
 
-public class PostalCodeRetriever implements LocationContract.PostCodeProvider {
+public class LocationPostCode implements LocationContract.PostCodeFromLocation {
 
     Geocoder geocoder;
     private boolean isCancelled = false;
 
-    public PostalCodeRetriever(Context context) {
+    public LocationPostCode(Context context) {
         geocoder = new Geocoder(context, Locale.getDefault());
     }
 
     @Override
     public void cancel(boolean cancel) {
-        isCancelled = true;
+        isCancelled = cancel;
     }
 
     @Override
-    public void fetchPostCodeFrom(final double latitude, final double longitude, final LocationContract.OnPostCodeFetchListener postCodeFetchListener) {
+    public void fetchPostCodeFromLocation(final double latitude, final double longitude, final LocationContract.OnPostCodeFetchListener postCodeFetchListener) {
         Maybe.fromCallable(() -> getPostCodeFrom(latitude, longitude))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

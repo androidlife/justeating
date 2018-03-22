@@ -13,13 +13,13 @@ import timber.log.Timber;
 /**
  */
 
-public class LastLocationProvider implements LocationContract.LocationProvider {
+public class LastLocationRetriever implements LocationContract.LocationProvider {
 
     private boolean isCancelled = false;
 
     private FusedLocationProviderClient fusedLocationProviderClient;
 
-    public LastLocationProvider(Context context) {
+    public LastLocationRetriever(Context context) {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
     }
 
