@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers;
 /**
  */
 
-public class RestaurantsListProvider implements ListContract.Model {
+public class ListModel implements ListContract.Model {
 
     private boolean isCancelled = false;
 

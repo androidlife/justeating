@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="18dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="15dp">
+
+    <ImageView
+        android:id="@+id/img_view"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@color/black_70" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:singleLine="true"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toRightOf="@id/img_view"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Some    Restaurants Are Doing Wellsdfljfsl" />
+
+    <RatingBar
+        android:id="@+id/rating_bar"
+        style="?attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:max="5"
+        android:numStars="5"
+        app:layout_constraintLeft_toRightOf="@id/img_view"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        tools:rating="3" />
+
+    <TextView
+        android:id="@+id/tv_total_rating"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="4dp"
+        android:maxLines="1"
+        android:textColor="#6a6a6a"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toRightOf="@id/rating_bar"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        tools:text="(100)" />
+
+    <TextView
+        android:id="@+id/tv_available"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="6dp"
+        android:drawableStart="@drawable/ic_visibility"
+        android:gravity="center|left"
+        android:textColor="#818181"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toRightOf="@id/img_view"
+        app:layout_constraintTop_toBottomOf="@id/tv_total_rating"
+        tools:text="IsOpenNow" />
+
+    <TextView
+        android:id="@+id/tv_cuisine"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="3dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textColor="#818181"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toRightOf="@id/img_view"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_available"
+        tools:text="Cuisines:Hot, spicy, noodles and stuff" />
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipe_ref_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -8,18 +9,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/info_view_bg"
+            android:gravity="center|left"
+            android:paddingLeft="20dp"
+            android:textColor="#767676"
+            android:textSize="13sp"
+            tools:text="88 restaurants" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_restaurant_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="35dp" />
 
         <TextView
             android:id="@+id/tv_info"
+            style="@style/InfoTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            style="@style/InfoTextStyle"
             android:visibility="gone" />
     </FrameLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

@@ -11,11 +11,15 @@ import java.util.List;
 
 public interface ListContract {
     interface View {
+        void navigateForPostCode();
 
+        void updatePostCode();
     }
 
     interface Presenter {
+        void searchForPostCode();
 
+        void onNewPostCode();
     }
 
     interface Model extends CancelCallback {
