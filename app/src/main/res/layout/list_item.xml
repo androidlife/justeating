@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/row_item_bg"
     android:paddingBottom="18dp"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
