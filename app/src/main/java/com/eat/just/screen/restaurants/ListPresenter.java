@@ -15,9 +15,9 @@ public class ListPresenter implements ListContract.Presenter {
     private ListContract.View view;
     private ListContract.Model model;
 
-    public ListPresenter(ListContract.View view) {
+    public ListPresenter(ListContract.View view, ListContract.Model model) {
         this.view = view;
-        model = new ListModel();
+        this.model = model;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class ListPresenter implements ListContract.Presenter {
 
     private void fetchRestaurantsByPostCode() {
         if (view.getViewState() == ListContract.View.STATE_EMPTY) {
-            if (!GeneralUtil.isConnectedToNetwork()) {
+            if (!view.isConnectedToNetwork()) {
                 setViewError("No internet connection");
                 return;
             }

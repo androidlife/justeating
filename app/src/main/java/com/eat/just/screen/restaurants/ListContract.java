@@ -29,6 +29,8 @@ public interface ListContract {
 
         void setData(List<Restaurant> restaurants);
 
+        boolean isConnectedToNetwork();
+
         int STATE_EMPTY = 0x1, STATE_ERROR = 0x2, STATE_FETCHED = 0x3;
     }
 

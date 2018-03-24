@@ -20,6 +20,8 @@ import com.eat.just.model.Restaurant;
 import com.eat.just.screen.restaurants.search.SearchInputActivity;
 import com.eat.just.screen.restaurants.widgets.RestaurantListAdapter;
 import com.eat.just.screen.restaurants.widgets.RowItemSpace;
+import com.eat.just.utils.GeneralUtil;
+import com.eat.just.utils.Injection;
 
 import java.util.List;
 
@@ -57,7 +59,7 @@ public class ListActivity extends AppCompatActivity implements ListContract.View
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_logo);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this);
-        presenter = new ListPresenter(this);
+        presenter = new ListPresenter(this, Injection.provideListModel());
         swipeRefreshLayout.setEnabled(false);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -163,6 +165,11 @@ public class ListActivity extends AppCompatActivity implements ListContract.View
         }
 
         tvTotal.setText(String.valueOf(restaurants.size()).concat(" Restaurants"));
+    }
+
+    @Override
+    public boolean isConnectedToNetwork() {
+        return GeneralUtil.isConnectedToNetwork();
     }
 
     @OnClick({R.id.tv_info})
