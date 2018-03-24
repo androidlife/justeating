@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:paddingTop="35dp" />
+            android:paddingTop="35dp"
+            />
 
         <TextView
             android:id="@+id/tv_info"
@@ -25,7 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:text="@string/info_tap_to_retry"/>
 
         <TextView
             android:id="@+id/tv_total"
