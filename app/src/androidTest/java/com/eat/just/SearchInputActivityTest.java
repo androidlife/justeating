@@ -36,7 +36,7 @@ public class SearchInputActivityTest {
     public IntentsTestRule<SearchInputActivity> activityActivityTestRule
             = new IntentsTestRule<>(SearchInputActivity.class);
 
-
+    @Test
     public void postCodeInputTest() {
         final String postCode = "EC1A";
         onView(withId(android.support.v7.appcompat.R.id.search_src_text))

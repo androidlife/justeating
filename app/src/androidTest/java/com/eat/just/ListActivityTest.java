@@ -1,21 +1,21 @@
 package com.eat.just;
 
+import android.app.Activity;
+import android.app.Instrumentation;
+import android.content.Intent;
 import android.support.test.espresso.IdlingPolicies;
 import android.support.test.espresso.IdlingRegistry;
-import android.support.test.espresso.UiController;
-import android.support.test.espresso.ViewAction;
+import android.support.test.espresso.intent.Intents;
+import android.support.test.espresso.intent.matcher.IntentMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.text.TextUtils;
-import android.view.View;
-import android.widget.TextView;
 
 import com.eat.just.screen.restaurants.ListActivity;
 import com.eat.just.utils.CustomIdlingResource;
 import com.eat.just.utils.CustomViewActions;
 import com.eat.just.utils.GeneralUtil;
 
-import org.hamcrest.Matcher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -27,7 +27,6 @@ import java.util.concurrent.TimeUnit;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static com.eat.just.utils.CustomViewActions.recyclerScrollTo;
@@ -60,6 +59,10 @@ public class ListActivityTest {
 
     @Test
     public void fetchTest() {
+        fetchByPostCode();
+    }
+
+    public void fetchByPostCode() {
         if (GeneralUtil.isConnectedToNetwork()) {
             onView(withId(R.id.swipe_ref_layout)).check(matches(isSwipeRefreshing()));
             IdlingRegistry.getInstance().register(idlingResource);
@@ -83,33 +86,19 @@ public class ListActivityTest {
         }
     }
 
+    @Test
+    public void fetchByNewPostCode() {
+        Intents.init();
+        Intents.intending(IntentMatchers.isInternal()).respondWith(getResultIntent("NE1"));
+        onView(withId(R.id.action_search)).perform(click());
+        Intents.release();
+        fetchByPostCode();
+    }
 
-    private int getCountFromInfo() {
-        final int[] count = new int[1];
-        onView(withId(R.id.tv_total)).perform(new ViewAction() {
-            @Override
-            public Matcher<View> getConstraints() {
-                return isAssignableFrom(TextView.class);
-            }
-
-            @Override
-            public String getDescription() {
-                return "Hackish way of getting textview value";
-            }
-
-            @Override
-            public void perform(UiController uiController, View view) {
-                if (view instanceof TextView) {
-                    String value = ((TextView) view).getText().toString();
-                    if (!TextUtils.isEmpty(value)) {
-                        value = value.split("\\s")[0];
-                        count[0] = Integer.valueOf(value);
-                    }
-                }
-
-            }
-        });
-        return count[0];
+    private Instrumentation.ActivityResult getResultIntent(String newPostCode) {
+        Intent resultData = new Intent();
+        resultData.putExtra(Extras.SEARCH_QUERY, newPostCode);
+        return new Instrumentation.ActivityResult(Activity.RESULT_OK, resultData);
     }
 
 
