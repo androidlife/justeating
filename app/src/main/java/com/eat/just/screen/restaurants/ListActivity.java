@@ -167,6 +167,6 @@ public class ListActivity extends AppCompatActivity implements ListContract.View
 
     @OnClick({R.id.tv_info})
     public void onClick(View view) {
-
+        presenter.retry();
     }
 }

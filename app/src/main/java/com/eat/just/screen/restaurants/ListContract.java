@@ -38,6 +38,8 @@ public interface ListContract {
         void onNewPostCode();
 
         void start(boolean start);
+
+        void retry();
     }
 
     interface Model extends CancelCallback {

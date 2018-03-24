@@ -4,6 +4,7 @@ import com.eat.just.model.Error;
 import com.eat.just.model.Restaurant;
 import com.eat.just.utils.GeneralUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +29,7 @@ public class ListPresenter implements ListContract.Presenter {
     @Override
     public void onNewPostCode() {
         view.updatePostCode();
+        retry();
     }
 
     @Override
@@ -65,6 +67,13 @@ public class ListPresenter implements ListContract.Presenter {
                 }
             });
         }
+    }
+
+    @Override
+    public void retry() {
+        view.setData(new ArrayList<>());
+        view.setViewState(ListContract.View.STATE_EMPTY);
+        fetchRestaurantsByPostCode();
     }
 
     private void setViewError(String errorMsg) {
