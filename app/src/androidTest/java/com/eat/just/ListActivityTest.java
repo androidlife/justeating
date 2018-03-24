@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.eat.just.screen.restaurants.ListActivity;
 import com.eat.just.utils.CustomIdlingResource;
+import com.eat.just.utils.CustomViewActions;
 import com.eat.just.utils.GeneralUtil;
 
 import org.hamcrest.Matcher;
@@ -63,7 +64,13 @@ public class ListActivityTest {
             onView(withId(R.id.swipe_ref_layout)).check(matches(isSwipeRefreshing()));
             IdlingRegistry.getInstance().register(idlingResource);
             idlingResource.startCountdown(TIMEOUT_FETCH, TIMEOUT_UNIT);
-            int totalItems = getCountFromInfo();
+
+            int totalItems = 0;
+            String value = CustomViewActions.getTextFromId(R.id.tv_total);
+            if (!TextUtils.isEmpty(value)) {
+                value = value.split("\\s")[0];
+                totalItems = Integer.valueOf(value);
+            }
             if (totalItems > 0)
                 onView(withId(R.id.rv_restaurant_list)).perform(recyclerScrollTo(totalItems));
             else
