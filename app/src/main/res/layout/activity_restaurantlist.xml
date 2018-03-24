@@ -3,21 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipe_ref_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".screen.restaurants.ListActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:background="@drawable/info_view_bg"
-            android:gravity="center|left"
-            android:paddingLeft="20dp"
-            android:textColor="#767676"
-            android:textSize="13sp"
-            tools:text="88 restaurants" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_restaurant_list"
@@ -34,5 +26,17 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/info_view_bg"
+            android:gravity="center|start"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp"
+            android:textColor="#767676"
+            android:textSize="13sp"
+            tools:text="88 restaurants" />
     </FrameLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

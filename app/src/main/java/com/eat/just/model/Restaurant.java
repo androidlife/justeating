@@ -32,9 +32,9 @@ public class Restaurant {
             allCuisines = "Cuisine: ";
             if (cuisines != null && cuisines.size() > 0) {
                 for (int i = 0; i < cuisines.size(); ++i) {
-                    allCuisines.concat(cuisines.get(i).name);
+                    allCuisines = allCuisines.concat(cuisines.get(i).name);
                     if (i != cuisines.size() - 1)
-                        allCuisines.concat(", ");
+                        allCuisines = allCuisines.concat(", ");
                 }
             }
         }
@@ -54,7 +54,7 @@ public class Restaurant {
     public String getTotalNumberOfRatings() {
         if (totalNumRatings == null) {
             totalNumRatings = "";
-            totalNumRatings.concat("( ").concat(String.valueOf(numOfRatings))
+            totalNumRatings = totalNumRatings.concat("( ").concat(String.valueOf(numOfRatings))
                     .concat(" )");
         }
         return totalNumRatings;

@@ -63,11 +63,11 @@ public class RowViewHolder extends RecyclerView.ViewHolder {
         ratingBar.setRating(restaurant.ratingStars);
         ImageLoader.loadImage(restaurant.getLogoUrl(), imageView, imageLoadOptions);
         if (restaurant.isOpenNow) {
-            tvAvailable.setCompoundDrawables(available, null, null, null);
+            tvAvailable.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_visibility, 0, 0, 0);
             tvAvailable.setText("Open Now");
         } else {
-            tvAvailable.setCompoundDrawables(notAvailable, null, null, null);
-            tvAvailable.setText("Closed");
+            tvAvailable.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_visibility_off, 0, 0, 0);
+            tvAvailable.setText("Closed Now");
         }
 
 

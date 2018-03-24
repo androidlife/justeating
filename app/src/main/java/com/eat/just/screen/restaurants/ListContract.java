@@ -14,12 +14,30 @@ public interface ListContract {
         void navigateForPostCode();
 
         void updatePostCode();
+
+        int getViewState();
+
+        void setViewState(int viewState);
+
+        void showError(boolean show);
+
+        void showProgress(boolean show);
+
+        void showInfo(String infoMsg);
+
+        String getPostCode();
+
+        void setData(List<Restaurant> restaurants);
+
+        int STATE_EMPTY = 0x1, STATE_ERROR = 0x2, STATE_FETCHED = 0x3;
     }
 
     interface Presenter {
         void searchForPostCode();
 
         void onNewPostCode();
+
+        void start(boolean start);
     }
 
     interface Model extends CancelCallback {
@@ -31,4 +49,6 @@ public interface ListContract {
 
         void onFailure(Error error);
     }
+
+
 }

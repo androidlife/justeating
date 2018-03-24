@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/row_item_bg"
     android:paddingBottom="18dp"
     android:paddingLeft="15dp"
@@ -12,8 +12,8 @@
 
     <ImageView
         android:id="@+id/img_view"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/img_width"
+        android:layout_height="@dimen/img_height"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:background="@color/black_70" />

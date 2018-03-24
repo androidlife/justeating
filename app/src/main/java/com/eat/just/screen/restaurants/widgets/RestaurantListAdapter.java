@@ -13,13 +13,18 @@ import java.util.List;
 /**
  */
 
-public class ListAdapter extends RecyclerView.Adapter<RowViewHolder> {
+public class RestaurantListAdapter extends RecyclerView.Adapter<RowViewHolder> {
 
 
     private List<Restaurant> restaurants;
 
-    public ListAdapter(List<Restaurant> restaurants) {
+    public RestaurantListAdapter(List<Restaurant> restaurants) {
         this.restaurants = restaurants;
+    }
+
+    public void setRestaurants(List<Restaurant> restaurants) {
+        this.restaurants = restaurants;
+        notifyDataSetChanged();
     }
 
     @Override
