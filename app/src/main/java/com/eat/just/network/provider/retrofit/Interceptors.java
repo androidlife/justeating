@@ -9,15 +9,15 @@ import okhttp3.logging.HttpLoggingInterceptor;
 /**
  */
 
-public class InterceptorProvider {
+public class Interceptors {
 
-    public HttpLoggingInterceptor getLoggingInterceptor(HttpLoggingInterceptor.Level level) {
+    public static HttpLoggingInterceptor getLoggingInterceptor(HttpLoggingInterceptor.Level level) {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(level);
         return loggingInterceptor;
     }
 
-    public Interceptor getAuthorizationInterceptor() {
+    public static Interceptor getAuthorizationInterceptor() {
         return chain -> {
             Request original = chain.request();
             Request.Builder requestBuilder = original.newBuilder()

@@ -3,6 +3,7 @@ package com.eat.just.screen.restaurants;
 import com.eat.just.model.Error;
 import com.eat.just.model.Restaurant;
 import com.eat.just.network.provider.retrofit.ApiManager;
+import com.eat.just.network.provider.retrofit.ApiService;
 
 import java.util.List;
 
@@ -16,6 +17,12 @@ public class ListModel implements ListContract.Model {
 
     private boolean isCancelled = false;
 
+    private ApiService apiService;
+
+    public ListModel(ApiService apiService) {
+        this.apiService = apiService;
+    }
+
     @Override
     public void cancel(boolean cancel) {
         isCancelled = cancel;
@@ -23,7 +30,7 @@ public class ListModel implements ListContract.Model {
 
     @Override
     public void fetchRestaurants(String postCode, ListContract.OnRestaurantsFetchListener restaurantsFetchListener) {
-        ApiManager.getApiService().getRestaurantsFromPostCode(postCode)
+        apiService.getRestaurantsFromPostCode(postCode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

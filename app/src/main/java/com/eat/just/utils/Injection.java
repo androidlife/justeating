@@ -3,6 +3,7 @@ package com.eat.just.utils;
 import android.content.Context;
 import android.location.Geocoder;
 
+import com.eat.just.network.provider.retrofit.ApiManager;
 import com.eat.just.screen.restaurants.ListContract;
 import com.eat.just.screen.restaurants.ListModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -16,7 +17,7 @@ import java.util.Locale;
 public class Injection {
 
     public static ListContract.Model provideListModel() {
-        return new ListModel();
+        return new ListModel(ApiManager.getApiService());
     }
 
     public static FusedLocationProviderClient getFusedLocationProviderClient(Context context) {
