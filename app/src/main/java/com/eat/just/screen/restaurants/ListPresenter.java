@@ -21,7 +21,6 @@ public class ListPresenter implements ListContract.Presenter {
 
     @Override
     public void searchForPostCode() {
-        //TODO check whether view is in fetching state or not
         view.navigateForPostCode();
     }
 
