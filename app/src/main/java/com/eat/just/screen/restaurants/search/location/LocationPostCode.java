@@ -22,8 +22,8 @@ public class LocationPostCode implements LocationContract.PostCodeFromLocation {
     Geocoder geocoder;
     private boolean isCancelled = false;
 
-    public LocationPostCode(Context context) {
-        geocoder = new Geocoder(context, Locale.getDefault());
+    public LocationPostCode(Geocoder geocoder) {
+        this.geocoder = geocoder;
     }
 
     @Override

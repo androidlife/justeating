@@ -1,9 +1,11 @@
 package com.eat.just.screen.restaurants.search.location;
 
 import android.content.Context;
+import android.location.Geocoder;
 import android.location.Location;
 
 import com.eat.just.model.Error;
+import com.google.android.gms.location.FusedLocationProviderClient;
 
 /**
  */
@@ -15,9 +17,10 @@ public class PostalCodeProvider implements LocationContract.PostCodeProvider {
 
     private boolean isCancelled = false;
 
-    public PostalCodeProvider(Context context) {
-        postCodeFromLocation = new LocationPostCode(context);
-        locationProvider = new LastLocationRetriever(context);
+    public PostalCodeProvider(FusedLocationProviderClient fusedLocationProviderClient,
+                              Geocoder geocoder) {
+        postCodeFromLocation = new LocationPostCode(geocoder);
+        locationProvider = new LastLocationRetriever(fusedLocationProviderClient);
     }
 
     @Override

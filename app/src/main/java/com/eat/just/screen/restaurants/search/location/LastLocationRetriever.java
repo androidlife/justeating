@@ -19,8 +19,8 @@ public class LastLocationRetriever implements LocationContract.LocationProvider 
 
     private FusedLocationProviderClient fusedLocationProviderClient;
 
-    public LastLocationRetriever(Context context) {
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
+    public LastLocationRetriever(FusedLocationProviderClient fusedLocationProviderClient) {
+        this.fusedLocationProviderClient = fusedLocationProviderClient;
     }
 
     @Override

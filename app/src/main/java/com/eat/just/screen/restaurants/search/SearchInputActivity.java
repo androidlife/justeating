@@ -19,6 +19,7 @@ import com.eat.just.base.PermissionActivity;
 import com.eat.just.screen.restaurants.search.location.LocationContract;
 import com.eat.just.screen.restaurants.search.location.PostalCodeProvider;
 import com.eat.just.model.Error;
+import com.eat.just.utils.Injection;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,7 +40,8 @@ public class SearchInputActivity extends PermissionActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_input);
         ButterKnife.bind(this);
-        postCodeProvider = new PostalCodeProvider(this);
+        postCodeProvider = new PostalCodeProvider(Injection.getFusedLocationProviderClient(this),
+                Injection.getGeoCoder(this));
     }
 
 

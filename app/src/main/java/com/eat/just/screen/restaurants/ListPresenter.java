@@ -2,7 +2,6 @@ package com.eat.just.screen.restaurants;
 
 import com.eat.just.model.Error;
 import com.eat.just.model.Restaurant;
-import com.eat.just.utils.GeneralUtil;
 
 import java.util.ArrayList;
 import java.util.List;

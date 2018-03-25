@@ -41,9 +41,12 @@ public class ListPresenterTest {
     @Test
     public void fetchSuccessTest() {
         presenter.start(true);
+        fetchSuccess();
+    }
+
+    private void fetchSuccess() {
         Mockito.verify(model).fetchRestaurants(Matchers.any(String.class), fetchListener.capture());
         fetchListener.getValue().onSuccess(new ArrayList<>());
-
         Mockito.verify(view).setViewState(ListContract.View.STATE_FETCHED);
     }
 
@@ -53,6 +56,12 @@ public class ListPresenterTest {
         Mockito.verify(model).fetchRestaurants(Matchers.any(String.class), fetchListener.capture());
         fetchListener.getValue().onFailure(Matchers.any(Error.class));
         Mockito.verify(view).setViewState(ListContract.View.STATE_ERROR);
+    }
+
+    @Test
+    public void retryTest() {
+        presenter.onNewPostCode();
+        fetchSuccess();
     }
 
 }
